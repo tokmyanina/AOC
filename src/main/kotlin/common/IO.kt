@@ -47,3 +47,26 @@ fun<T> getParsedCountOfResults(fileName: String, parse: (String) -> T, check: (T
         .count { check(it) })
 }
 
+fun readDataAs2DArray(filename: String, border: Int = 0, borderSymbol: Char = '#'): Point2DArray {
+    val data = readStrings(filename)
+    val rows = data.size + border * 2
+    val cols = data[0].length + border * 2
+    var result = emptyArray<CharArray>()
+    for (i in 0 until rows) {
+        val row = if (i < border || i >= data.size + border) {
+            CharArray(cols) {borderSymbol}
+        }
+        else {
+            CharArray(cols) {
+                col -> if (col < border || col >= cols - border) {
+                    borderSymbol
+                }
+                else {
+                    data[i - border][col - border]
+                }
+            }
+        }
+        result += row
+    }
+    return result
+}

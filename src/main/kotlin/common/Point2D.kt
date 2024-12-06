@@ -1,6 +1,6 @@
 package common
 
-class Point2D(private val row: Int, private val col: Int) {
+class Point2D(val row: Int, val col: Int) {
 
     fun north() = Point2D(row , col - 1)
 
@@ -27,6 +27,4 @@ class Point2D(private val row: Int, private val col: Int) {
         result = 31 * result + col
         return result
     }
-
-
 }
